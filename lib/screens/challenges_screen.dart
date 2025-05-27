@@ -1,8 +1,10 @@
 import 'package:ecotrail/screens/ChallengesDetail.dart';
+import 'package:ecotrail/screens/tabs/categories.dart';
 import 'package:ecotrail/widgets/custom_heading.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import '../repository/DataRepository.dart';
 
 class ChallengesScreen extends StatefulWidget {
   const ChallengesScreen({super.key});
@@ -27,10 +29,21 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
         elevation: 0,
         title: CustomHeading(title: "Challenges"),
         centerTitle: true,
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            child: Icon(Icons.menu, color: Colors.white),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: IconButton(icon:const Icon(Icons.menu), color: Colors.white, onPressed: () {
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CategoriesScreen(
+                    categories: DataRepository.categories,
+                    selectedCategoryId: 'all', // Default to 'All'
+                  ),
+                ),
+              );
+            },),
           ),
         ],
         leading: const Icon(Icons.search, color: Colors.white),
